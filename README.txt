@@ -245,4 +245,6 @@ it appropriately.
 TODO: Optimize by caching responses in (and fetching from) HTML5 localStorage
 
 
-TODO: You can download the source code from GitHub at: 
+You can download the source code from GitHub at:
+
+	git://github.com/erturne/grails-jquery-datatables-example.git
