@@ -1,0 +1,15 @@
+.classpath
+.project
+.settings
+build.xml
+/*.launch
+/*.tmpproj
+stacktrace.log
+/target
+test/reports
+web-app/WEB-INF
+web-app/plugins
+*.war
+.svn
+plugins/*
+*DB*

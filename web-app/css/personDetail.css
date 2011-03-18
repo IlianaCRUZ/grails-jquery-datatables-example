@@ -1,0 +1,10 @@
+.personDetails {
+	margin: 0;
+	padding: 5px;
+	width: 100%;
+}
+
+.personDetails dt {
+	float: right;
+}
+
