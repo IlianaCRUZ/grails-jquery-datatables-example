@@ -3,23 +3,54 @@ package leapingmind
 import grails.converters.JSON
 import grails.converters.XML
 
-class PersonController {
+
+class PeopleController {
 	
-	def scaffold = true
+	def scaffold = Person
 	
+
 	/**
-	 * Lists all people.
-	 * 
-	 * GET /person
+	 * View to show data in a jQuery DataTable
 	 */
 	def index = {
-			
+	}
+
+   /**
+	* Lists all people.
+	*
+	* GET /people
+	* GET /people.json
+	* GET /people.xml
+	* 
+	* @param callback For JSONP.
+	*/
+	def list = {
+		def people = Person.list()
+		if ( ! people ) {
+			render(text: "No people found", status: 404)
+		} else {
+			withFormat {
+				json {
+					if ( params.callback ) {
+						render(contentType: 'application/json',
+							   text: "${params.callback}(${people as JSON})")
+					} else {
+						render people as JSON
+					}
+				}
+				xml {
+					render people as XML
+				}
+			}
+		}
 	}
 	
 	/**
 	 * Shows a specific person.
 	 * 
-	 * GET /person/1
+	 * GET /people/1
+	 * GET /people/1.json
+	 * GET /people/1.xml
 	 * 
 	 * @param id
 	 * @param callback For JSONP
@@ -46,8 +77,9 @@ class PersonController {
 		}
 	}
 	
+	
 	/**
-	 * Generates data for a jQuery DataTables.
+	 * Generates data for a jQuery DataTables table showing people.
 	 * 
 	 * @param sEcho
 	 * @param sSearch

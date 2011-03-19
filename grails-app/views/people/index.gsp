@@ -10,7 +10,7 @@
           sScrollY: '70%',
           bProcessing: true,
           bServerSide: true,
-          sAjaxSource: '${request.contextPath + '/person/dataTablesData'}' ,
+          sAjaxSource: '${request.contextPath + '/people/dataTablesData'}' ,
           sPaginationType: "full_numbers",
           aLengthMenu: [[100, 500, 1000, 5000, -1], [100, 500, 1000, 5000, "All"]],
           iDisplayLength: 500,
@@ -25,7 +25,7 @@
           		var id = aData[0];
 				$.ajax({
 					dataType: 'json',
-					url: '${request.contextPath + '/person/show/'}' + id + '.json',
+					url: '${request.contextPath + '/people/'}' + id + '.json',
 					success: function(data, status, xhr) {
 						var dl = $('<dl class="personDetails"></dl>')
 									.append('<dt>Id:</dt><dd>' + data.id +'</dd>')
