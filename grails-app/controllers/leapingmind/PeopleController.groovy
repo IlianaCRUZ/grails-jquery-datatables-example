@@ -109,7 +109,10 @@ class PeopleController {
 		if ( params.sSearch ) {
 		   query.append(" where (${filter})")
 		}
-		query.append(" order by p.${propertiesToRender[params.iSortCol_0 as int]} ${params.sSortDir_0}")
+		
+		def sortProperty = propertiesToRender[params.iSortCol_0 as int]
+		def sortDir = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
+		query.append(" order by p.${sortProperty} ${sortDir}")
 	
 		// Execute the query
 		def people = []
@@ -122,11 +125,11 @@ class PeopleController {
 			  dataToRender.iTotalDisplayRecords = result[0]
 		   }
 		   people = Person.findAll(query.toString(),
-			  [filter: "%${params.sSearch}%"],
-			  [max: params.iDisplayLength as int, offset: params.iDisplayStart as int])
+			   [filter: "%${params.sSearch}%"],
+			   [max: params.iDisplayLength as int, offset: params.iDisplayStart as int])
 		} else {
 		   people = Person.findAll(query.toString(),
-		   [max: params.iDisplayLength as int, offset: params.iDisplayStart as int])
+			   [max: params.iDisplayLength as int, offset: params.iDisplayStart as int])
 		}
 	
 		// Process the response
